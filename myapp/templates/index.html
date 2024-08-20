@@ -26,11 +26,10 @@
 					<a href="javascript:" class="btn btn-primary rounded">Enroll Today</a>
 					<div class="nav-drop">[]
 						<ul>
-							<li class="active visible-sm visible-xs"><a href="#">Home</a></li>
-							<li><a href="#">Company</a></li>
-							<li><a href="#">About Sports</a></li>
-							<li><a href="#">Subscription</a></li>
-							<li><a href="#">Contact Us</a></li>
+							{% for item in menu_items %}
+							<li class=" nav-item{% if item.active%} active visible-sm visible-xs{% endif %}"><a class="nav-link " href="">{{ item.name }}{% if item.active %} <span class= "sr-only">(current)</span>{% endif %}</a>
+							</li>
+							{% endfor %}
 						</ul>
 						<div class="drop-holder visible-sm visible-xs">
 							<span>Follow Us</span>
@@ -75,49 +74,27 @@
 			<div class="row">
 				<div class="col-md-5">
 					<ul class="visual-list">
+						{% for nigga in holder_items %}
 						<li>
 							<div class="img-holder">
-								<img src="static/images/graph-04.svg" width="110" alt="">
+								<img src= "{{nigga.img}}"
+								    {% if nigga.image_width %} width="{{nigga.image_width}}"{% endif %}
+									{% if nigga.image_height %} height="{{nigga.image_height}}"{% endif %}
+								    alt="">
 							</div>
 							<div class="text-holder">
-								<h3>Riding Mountain Bike</h3>
-								<p>Aenean cursus imperdiet nisl id fermentum. Aliquam pharetra dui laoreet vulputate dignissim. Sed id metus id quam auctor molestie eget ut augue. </p>
+								<h3>{{nigga.name}}</h3>
+								<p>{{nigga.info}}</p>
 							</div>
 						</li>
-						<li>
-							<div class="img-holder">
-								<img class="pull-left" src="static/images/graph-03.svg" width="90" alt="">
-							</div>
-							<div class="text-holder">
-								<h3>Volley Ball Intense Training</h3>
-								<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-							</div>
-						</li>
-						<li>
-							<div class="img-holder">
-								<img src="static/images/graph-02.svg" height="84" alt="">
-							</div>
-							<div class="text-holder">
-								<h3>Learn Surfing From Experts</h3>
-								<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-							</div>
-						</li>
-						<li>
-							<div class="img-holder">
-								<img src="static/images/graph-01.svg" height="71" alt="">
-							</div>
-							<div class="text-holder">
-								<h3>Archers Club</h3>
-								<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-							</div>
-						</li>
-					</ul>
+						{% endfor %}
+					</ul>	
 				</div>
-				<div class="col-md-7">
-					<div class="slide-holder">
-						<div class="img-slide scroll-trigger"><img src="static/images/img-01.png" height="624" width="684" alt=""></div>
-					</div>
-				</div>
+				{% comment %} <div class="cold-md-7"> 
+                    <div class="slide-holder">
+						<div class ="img-slide scroll-trigger"><img src="static/images/img-01.png"  height ="624" width ="684" alt=""></div>
+					</div>	
+				</div> {% endcomment %}
 			</div>
 		</div>
 	</section>
@@ -127,23 +104,16 @@
 			<div class="container">
 				<h2>What Our Clients Say</h2>
 				<ul class="testimonials">
+					{% for pluto in review_items%}
 					<li>
-						<div class="img-holder"><a href="#"><img src="static/images/logo-1.png" height="84" width="124" alt=""></a></div>
-						<p><em>Sed vestibulum scelerisque urna, eu finibus leo facilisis sit amet. Proin id dignissim magna. Sed varius urna et pulvinar venenatis. </em></p>
+						<div class="img-holder"><a href="#">
+							<img src="{{pluto.img}}" 
+							{% if pluto.image_width %} width="{{pluto.image_width}}"{% endif %}
+							{% if pluto.image_height %} height="{{pluto.image_height}}"{% endif %}
+							 alt=""></a></div>
+						<p><em>{{ pluto.info }}</em></p>
 					</li>
-					<li>
-						<div class="img-holder"><a href="#"><img src="static/images/logo-2.png" height="90" width="148" alt=""></a></div>
-						<p><em>Donec euismod dolor ut ultricies consequat. Vivamus urna ipsum, rhoncus molestie neque ac, mollis eleifend nibh.</em></p>
-					</li>
-					<li>
-						<div class="img-holder"><a href="#"><img src="static/images/logo-3.png" height="100" width="100" alt=""></a></div>
-						<p><em>In efficitur in velit et tempus. Duis nec odio dapibus, suscipit erat fringilla, imperdiet nibh. Morbi tempus auctor felis ac vehicula. </em></p>
-					</li>
-					
-					<li>
-						<div class="img-holder"><a href="#"><img src="static/images/logo-4.png" height="50" width="108" alt=""></a></div>
-						<p><em>Fusce pharetra erat id odio blandit, nec pharetra eros venenatis. Pellentesque porttitor cursus massa et vestibulum.</em></p>
-					</li>
+					{% endfor %}
 				</ul>
 			</div>
 		</div>
@@ -151,58 +121,22 @@
 			<div class="container">
 				<h2>Pricing Plans</h2>
 				<div class="pricing-tables">
+					{% for vamp in price_items %}
 					<div class="plan">
 		                <div class="head">
-		                    <h3>Students</h3>
+		                    <h3>{{vamp.user}}</h3>
 		                </div>
 		                <div class="price">
-		                    <span class="price-main"><span class="symbol">$</span>8</span>
-		                    <span class="price-additional">per month</span>
+		                    <span class="price-main"><span class="symbol">{{vamp.symbol}}</span>{{vamp.value}}</span>
+		                    <span class="price-additional">{{vamp.per}}</span>
 		                </div>
 		                <ul class="item-list">
-		                    <li>Personal License</li>
+		                    <li>{{vamp.benefits}}</li>
+							<li>{{vamp.benefits2}}</li>
 		                </ul>
 		                <button type="button" class="btn btn-default rounded">purchase</button>
 		            </div>
-		            <div class="plan">
-		                <div class="head">
-		                    <h3>professional</h3> </div>
-		                <div class="price">
-		                    <span class="price-main"><span class="symbol">$</span>19</span>
-		                    <span class="price-additional">per month</span>
-		                </div>
-		                    <ul class="item-list">
-		                       <li>Professional License</li>
-		                       <li>Email Support</li>
-		                    </ul>
-		                <button type="button" class="btn btn-default rounded">purchase</button>
-		            </div>
-		            <div class="plan recommended">
-		                <div class="head">
-		                    <h3>agency</h3> </div>
-		                <div class="price">
-		                    <span class="price-main"><span class="symbol">$</span>49</span>
-		                    <span class="price-additional">per month</span>
-		                </div>
-		                    <ul class="item-list">
-		                        <li>1-12 Team Members</li>
-		                        <li>Phone Support</li>
-		                    </ul>
-		                <button type="button" class="btn btn-default rounded">purchase</button>
-		            </div>
-		            <div class="plan">
-		                <div class="head">
-		                    <h3>enterprise</h3> </div>
-		                <div class="price">
-		                    <span class="price-main"><span class="symbol">$</span>79</span>
-		                    <span class="price-additional">per month</span>
-		                </div>
-		                <ul class="item-list">
-		                    <li>Unlimited Team Members</li>
-		                    <li>24/ 7 Phone Support</li>
-		                </ul>
-		                <button type="button" class="btn btn-default rounded">purchase</button>
-		            </div>
+  					{% endfor %}
 				</div>
  			</div>
 		</div>
@@ -272,6 +206,6 @@
 </div>
 <script src={% static "js/jquery-1.11.2.min.js"%}></script>
 <script src={% static "js/bootstrap.js"%}></script>
-<script src={% static "js/jquery.main.js"%}></script>
+<script src={% static "js/jquery.main.js"%}</script>
 </body>
 </html>
